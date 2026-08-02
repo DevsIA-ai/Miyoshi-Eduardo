@@ -88,7 +88,15 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   border-radius:50px; padding:.5rem 1.1rem .5rem .55rem;
   display:flex; align-items:center; gap:.7rem;
   backdrop-filter:blur(12px); box-shadow:0 2px 20px rgba(201,169,110,.18);
+  opacity:0; pointer-events:none;
+  transition:opacity .4s ease, padding .35s ease;
 }
+#music-bar.compact {
+  opacity:1; pointer-events:auto;
+  padding:.5rem; gap:0;
+}
+#music-bar.compact .music-label,
+#music-bar.compact .waves { display:none; }
 #music-btn {
   width:32px; height:32px; border-radius:50%;
   background:var(--gold); border:none; cursor:pointer;
@@ -131,12 +139,6 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   position:absolute; inset:0;
   width:100%; height:100%; object-fit:cover;
   z-index:0; pointer-events:none;
-}
-@media(max-width:600px){
-  /* En pantallas angostas la foto no recorta verticalmente por su proporción;
-     acercamos el encuadre y lo anclamos por debajo de la pareja para subirla
-     y que el nombre en script no quede sobre sus caras. */
-  #hero-image { transform:scale(1.3); transform-origin:50% 55%; }
 }
 #hero-overlay {
   position:absolute; inset:0; z-index:1; pointer-events:none;
@@ -488,10 +490,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   font-style:italic; color:var(--text-muted); line-height:1.85;
 }
 .avoid-pill {
-  display:inline-flex; align-items:center; gap:.5rem;
-  margin-top:1.75rem; padding:.55rem 1.2rem;
+  display:block; max-width:440px; margin:1.75rem auto 0;
+  padding:.9rem 1.3rem; text-align:center;
   background:#fef5f5; border:1px solid #f0d0cc;
-  border-radius:50px; font-size:.7rem; color:#c4827f; letter-spacing:.1em;
+  border-radius:14px; font-size:.7rem; color:#c4827f; letter-spacing:.05em; line-height:1.7;
 }
 
 /* ==============================
@@ -819,6 +821,24 @@ body.env-open { overflow:hidden; }
     padding-bottom: 1.4rem;
   }
 }
+
+@media(max-width:600px){
+  /* En pantallas angostas la foto no recorta verticalmente por su proporción;
+     acercamos el encuadre y lo anclamos por debajo de la pareja para subirla
+     y que el nombre en script no quede sobre sus caras. */
+  #hero-image { transform:scale(1.6); transform-origin:50% 38%; }
+
+  /* Cada texto del hero se posiciona de forma independiente (position:absolute)
+     para que mover uno no arrastre a los demás. */
+  #hero .hero-pre     { position:absolute !important; top:3%;  left:0; right:0; margin:0 !important; padding:0 1.75rem; letter-spacing:.3em; box-sizing:border-box; }
+  #hero .hero-orn-top { display:none !important; }
+  #hero .hero-names   { position:absolute !important; top:7%; left:0; right:0; margin:0 !important; font-size:4.75rem !important; }
+  #hero .hero-names .amp { font-size:2.375rem !important; }
+  #hero .hero-orn-mid { display:none !important; }
+  #hero .hero-date    { position:absolute !important; top:80%; left:0; right:0; margin:0 !important; }
+  #hero .hero-quote   { position:absolute !important; top:83%; left:0; right:0; margin:0 !important; }
+  #hero .hero-scroll  { bottom:1.5rem !important; }
+}
 </style>
 </head>
 <body>
@@ -911,15 +931,15 @@ body.env-open { overflow:hidden; }
 
   <p class="hero-pre">Con amor, les invitamos a nuestra boda</p>
 
-  <div class="divider-orn">✦</div>
+  <div class="divider-orn hero-orn-top">✦</div>
 
   <h1 class="hero-names">
-    Miyoshi
+    <span class="hero-name-miyoshi">Miyoshi</span>
     <span class="amp">&amp;</span>
-    Eduardo
+    <span class="hero-name-eduardo">Eduardo</span>
   </h1>
 
-  <div class="divider-orn">✦</div>
+  <div class="divider-orn hero-orn-mid">✦</div>
 
   <p class="hero-date">Sábado · 26 de Diciembre de 2026</p>
 
@@ -1171,20 +1191,20 @@ body.env-open { overflow:hidden; }
       <div class="g-cell" onclick="openLightbox(1)"><div class="g-inner"><img src="galeria/S1.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
       <div class="g-cell" onclick="openLightbox(2)"><div class="g-inner"><img src="galeria/S2.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
       <div class="g-cell" onclick="openLightbox(3)"><div class="g-inner"><img src="galeria/S4.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(4)"><div class="g-inner"><img src="galeria/S6.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(5)"><div class="g-inner"><img src="galeria/S8.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(6)"><div class="g-inner"><img src="galeria/S9.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(7)"><div class="g-inner"><img src="galeria/S10.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(8)"><div class="g-inner"><img src="galeria/S12.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(9)"><div class="g-inner"><img src="galeria/S13.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(10)"><div class="g-inner"><img src="galeria/S14.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(11)"><div class="g-inner"><img src="galeria/S15.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(12)"><div class="g-inner"><img src="galeria/S16.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(13)"><div class="g-inner"><img src="galeria/S17.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(14)"><div class="g-inner"><img src="galeria/S18.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(15)"><div class="g-inner"><img src="galeria/S19.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(16)"><div class="g-inner"><img src="galeria/S21.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
-      <div class="g-cell" onclick="openLightbox(17)"><div class="g-inner"><img src="galeria/S5.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(4)"><div class="g-inner"><img src="galeria/S5.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(5)"><div class="g-inner"><img src="galeria/S6.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(6)"><div class="g-inner"><img src="galeria/S8.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(7)"><div class="g-inner"><img src="galeria/S9.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(8)"><div class="g-inner"><img src="galeria/S10.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(9)"><div class="g-inner"><img src="galeria/S12.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(10)"><div class="g-inner"><img src="galeria/S13.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(11)"><div class="g-inner"><img src="galeria/S14.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(12)"><div class="g-inner"><img src="galeria/S15.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(13)"><div class="g-inner"><img src="galeria/S16.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(14)"><div class="g-inner"><img src="galeria/S17.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(15)"><div class="g-inner"><img src="galeria/S18.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(16)"><div class="g-inner"><img src="galeria/S19.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
+      <div class="g-cell" onclick="openLightbox(17)"><div class="g-inner"><img src="galeria/S21.jpg.jpeg" alt="Miyoshi y Eduardo" style="width:100%;height:100%;object-fit:cover"></div></div>
     </div>
     <p class="gallery-hint reveal">Toca una foto para verla en grande</p>
 
@@ -1212,7 +1232,7 @@ body.env-open { overflow:hidden; }
       Damas: vestido largo.<br>
       Caballeros: traje formal.
     </p>
-    <div class="avoid-pill reveal">⚠ Por favor evita el blanco (novia) y el verde olivo (cortejo)</div>
+    <div class="avoid-pill reveal">⚠ Por favor evita el blanco y tonos parecidos (beige, crema, marfil), reservados para la novia, y el verde olivo, reservado para el cortejo.</div>
   </div>
 </section>
 
@@ -1429,6 +1449,14 @@ const secObs = new IntersectionObserver(entries => {
 }, { threshold: 0.45 });
 SECS.forEach(id => { const el=document.getElementById(id); if(el) secObs.observe(el); });
 
+/* ---- MUSIC BAR: solo icono fuera del hero ---- */
+const musicBar = document.getElementById('music-bar');
+const heroSection = document.getElementById('hero');
+const musicBarObs = new IntersectionObserver(entries => {
+  entries.forEach(e => musicBar.classList.toggle('compact', !e.isIntersecting));
+}, { threshold: 0 });
+musicBarObs.observe(heroSection);
+
 /* ---- MUSIC ---- */
 let playing = false;
 const audio  = document.getElementById('bg-audio');
@@ -1470,6 +1498,7 @@ const galleryImages = [
   'galeria/S1.jpg.jpeg',
   'galeria/S2.jpg.jpeg',
   'galeria/S4.jpg.jpeg',
+  'galeria/S5.jpg.jpeg',
   'galeria/S6.jpg.jpeg',
   'galeria/S8.jpg.jpeg',
   'galeria/S9.jpg.jpeg',
@@ -1482,8 +1511,7 @@ const galleryImages = [
   'galeria/S17.jpg.jpeg',
   'galeria/S18.jpg.jpeg',
   'galeria/S19.jpg.jpeg',
-  'galeria/S21.jpg.jpeg',
-  'galeria/S5.jpg.jpeg'
+  'galeria/S21.jpg.jpeg'
 ];
 let lightboxIndex = 0;
 const lightboxEl = document.getElementById('lightbox');
